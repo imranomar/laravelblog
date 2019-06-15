@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Welcome Imran<br><small>What do you want to do today?</small>
                 </div>
 
                 <div class="links">
