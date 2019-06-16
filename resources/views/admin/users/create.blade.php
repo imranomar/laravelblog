@@ -28,12 +28,12 @@
         @endif
 
         <div class="form-group">
-            {!! Form::label('image','Image') !!}
-            {!! Form::file('image',null,['class'=>'form-control']) !!}
+            {!! Form::label('photo','Image') !!}
+            {!! Form::file('photo',null,['class'=>'form-control']) !!}
         </div>
 
-        @if($errors->has('email'))
-            <div class="alert alert-danger">{{$errors->first('email')}}</div>
+        @if($errors->has('photo'))
+            <div class="alert alert-danger">{{$errors->first('photo')}}</div>
         @endif
 
         <div class="form-group">
