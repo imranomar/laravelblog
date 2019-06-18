@@ -18,4 +18,9 @@ class Photo extends Model
         return $this->photo_path . $value;
     }
 
+    public function deletePhoto()
+    {
+        unlink(public_path().$this->file);
+    }
+
 }

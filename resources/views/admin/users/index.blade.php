@@ -1,6 +1,13 @@
 @extends('layouts.adminmaster')
 
 @section('content')
+
+    @if(Session::has('flash_message'))
+        <div class="alert alert-success">
+            <strong>{{ session('flash_message') }}</strong>
+        </div>
+    @endif
+
     <h1>Users</h1>
     <table class='table'>
         <tr>

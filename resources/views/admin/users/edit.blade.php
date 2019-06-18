@@ -70,10 +70,19 @@
             <div class="alert alert-danger">{{$errors->first('password')}}</div>
         @endif
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        <button type="submit" class="btn btn-primary pull-left">Submit</button>
+        {{ Form::close() }}
+
+        {!! Form::open(['method'=>'DELETE','action'=>['AdminUsersController@destroy',$user->id],'class'=>'pull-right']) !!}
+        {{ csrf_field() }}
+            <div class="form-group">
+                {!! Form::submit('Delete User',['class'=>'btn btn-danger']) !!}
+            </div>
+        {{ Form::close() }}
+
+
+
+
     </div>
 
 @stop
-
-
