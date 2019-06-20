@@ -23,4 +23,12 @@ Route::get('/admin', function () {
     return view('admin.index');
 });
 
-Route::resource('admin/users','AdminUsersController');
+//all stuff in admin users controller needs authorization
+Route::group(['middleware'=>'admin'],function (){
+    Route::resource('admin/users','AdminUsersController');
+    Route::resource('admin/posts','AdminPostsController');
+    Route::resource('admin/categories','AdminCategoriesController');
+    Route::resource('admin/media','AdminMediaController');
+});
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );

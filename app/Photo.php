@@ -20,7 +20,11 @@ class Photo extends Model
 
     public function deletePhoto()
     {
-        unlink(public_path().$this->file);
+        if(file_exists(public_path().$this->file))
+        {
+            unlink(public_path().$this->file);
+        }
+
     }
 
 }
