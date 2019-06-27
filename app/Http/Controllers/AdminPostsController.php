@@ -23,7 +23,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(2);
         return view('admin.posts.index',compact('posts'));
     }
 
@@ -133,4 +133,13 @@ class AdminPostsController extends Controller
         $post->delete();
         return redirect('admin/posts');
     }
+
+    public function post($slug)
+    {
+        $categories = Category::all();
+        $post = Post::where('id','=',3)->first();
+        $comments = $post->comments;
+        return view('post',compact('post','comments','categories'));
+    }
+
 }

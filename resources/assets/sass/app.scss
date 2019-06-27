@@ -9,3 +9,10 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 #admin-page { padding-top: 0px }
+
+.nested-comment {margin-left: 20px; padding-bottom: 15px}
+
+.comment-reply
+{
+  display: none;
+}

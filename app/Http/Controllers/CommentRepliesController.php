@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
+use Auth;
+use App\CommentReply;
+use App\Comment;
 use Illuminate\Http\Request;
-use App\Category;
+use Illuminate\Support\Facades\Session;
 
-class AdminCategoriesController extends Controller
+class CommentRepliesController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +22,7 @@ class AdminCategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('admin.categories.index',compact('categories'));
+        //
     }
 
     /**
@@ -30,7 +32,7 @@ class AdminCategoriesController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        //
     }
 
     /**
@@ -39,10 +41,9 @@ class AdminCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(Request $request)
     {
-        Category::create($request->all());
-        return redirect('admin/categories');
+        //
     }
 
     /**
@@ -54,6 +55,9 @@ class AdminCategoriesController extends Controller
     public function show($id)
     {
         //
+        $comment = Comment::findOrFail($id);
+        $replies = $comment->replies;
+        return view('admin.comments.replies.show',compact('replies'));
     }
 
     /**
@@ -64,8 +68,7 @@ class AdminCategoriesController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
-        return view('admin.categories.edit',compact('category'));
+        //
     }
 
     /**
@@ -75,11 +78,13 @@ class AdminCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
-        Category::findOrFail($id)->update($request->all());
-        return redirect('admin/categories');
+        $cr = CommentReply::findOrFail($id);
+        $cr->update($request->all());
+
+        return redirect()->back();
     }
 
     /**
@@ -90,7 +95,27 @@ class AdminCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        Category::destroy($id);
-        return redirect('admin/categories');
+        //
+        CommentReply::destroy($id);
+        return redirect()->back();
+    }
+
+    public function createReply(Request $request)
+    {
+        //return $request->all(); exit;
+        $user  = Auth::user();
+
+        $data = [
+            'body' => $request->body,
+            'comment_id' => $request->comment_id,
+            'author' => $user->name,
+            'email' => $user->email,
+            'photo' => $user->photos->file,
+
+        ];
+
+        CommentReply::create($data);
+        Session::flash('flash_message','reply Submitted');
+        return redirect()->back();
     }
 }
