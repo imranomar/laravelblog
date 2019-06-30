@@ -1,6 +1,9 @@
 @extends('layouts.adminmaster')
 
 @section('content')
+
+    @include('includes.tinyeditor')
+
     <h1>Post Create Page</h1>
 
     @include('includes/form_errors')

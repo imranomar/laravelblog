@@ -8,17 +8,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+            <a class="navbar-brand" href="/">Start Bootstrap</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
+                @if(Auth::guest())
                 <li>
-                    <a href="#">About</a>
+                    <a href="{{url('/login')}}">Login</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="{{url('/register')}}">Register</a>
                 </li>
+                @else
+                    <li>
+                        <a href="{{url('/admin')}}">Admin</a>
+                    </li>
+                    <li>
+                        <a href="{{url('/logout')}}">Logout</a>
+                    </li>
+                @endif
                 <li>
                     <a href="#">Contact</a>
                 </li>

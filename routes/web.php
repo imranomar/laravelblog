@@ -17,7 +17,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/post/{id}', ['as'=>'home.post','uses'=>'AdminPostsController@post']);
+Route::get('/post/{id}', ['as'=>'home.post','uses'=>'HomeController@post']);
 
 //all stuff in admin users controller needs authorization
 Route::group(['middleware'=>'admin'],function (){
@@ -31,6 +31,8 @@ Route::group(['middleware'=>'admin'],function (){
 });
 
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout' );
+
+Route::Delete('/delete/media','AdminMediaController@deleteMedia');
 
 // so that the user can only be logged in and can only access the create reply method of the Comment Controller
 Route::group(['middleware'=>'auth'],function (){
