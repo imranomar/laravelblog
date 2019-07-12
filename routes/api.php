@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\Http\Resources\Post as PostResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,10 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+//list posts
+Route::middleware('auth:api')->get('posts', function () {
+    $posts = Post::paginate(1);
+    return PostResource::collection($posts);
 });
